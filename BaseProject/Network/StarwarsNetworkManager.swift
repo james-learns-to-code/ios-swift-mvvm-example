@@ -8,6 +8,8 @@
 
 import Foundation
 
+typealias API = StarwarsNetworkManager
+
 final class StarwarsNetworkManager: NetworkManager {
     static let shared = StarwarsNetworkManager()
     

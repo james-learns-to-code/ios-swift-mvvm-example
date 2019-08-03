@@ -8,17 +8,18 @@
 
 import Foundation
 
-enum NetworkError: Error {
-    case url
-    case response(error: Error?)
-    case data
-    case jsonDecoding(error: Error?)
-    
-    static let domain = "app.network"
-}
-
 class NetworkManager {
+    typealias NetworkError = NetworkManager.CustomError
     
+    enum CustomError: Error {
+        case url
+        case response(error: Error?)
+        case data
+        case jsonDecoding(error: Error?)
+        
+        static let domain = "app.network"
+    }
+
     static let header: [String: String] = [
         "Content-Type": "application/json"
     ]
@@ -30,17 +31,18 @@ class NetworkManager {
         case get = "GET"
         
         var httpMethod: String {
-            return self.rawValue
+            return rawValue
         }
     }
     
     typealias DataResult = Result<Data, NetworkError>
     typealias DataResultHandler = (DataResult) -> Void
     
+    @discardableResult
     func request(
         with url: URL,
         type: RequestType,
-        handler: @escaping DataResultHandler) {
+        handler: @escaping DataResultHandler) -> URLSessionDataTask {
         
         var req = URLRequest(url: url)
         req.httpMethod = type.httpMethod
@@ -49,13 +51,13 @@ class NetworkManager {
         let config = URLSessionConfiguration.default
         let session = URLSession(configuration: config)
 
-        request(with: session, req, handler)
+        return request(with: session, req, handler)
     }
     
     func request(
         with session: URLSession,
         _ request: URLRequest,
-        _ handler: @escaping DataResultHandler) {
+        _ handler: @escaping DataResultHandler) -> URLSessionDataTask {
         
         let task = session.dataTask(with: request) {
             (responseData, response, responseError) in
@@ -71,6 +73,7 @@ class NetworkManager {
             handler(.success(data))
         }
         task.resume()
+        return task
     }
     
     // MARK: Decoder
