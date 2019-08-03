@@ -11,7 +11,12 @@ import UIKit
 final class StarwarsViewControllerWithXib: UIViewController {
     private let viewModel = StarwarsViewModel()
 
-    @IBOutlet private weak var tableView: UITableView!
+    @IBOutlet
+    private weak var tableView: UITableView! {
+        didSet {
+            tableView.register(StarwarsFilmCell.self, forCellReuseIdentifier: "StarwarsFilmCell")
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,22 +27,14 @@ final class StarwarsViewControllerWithXib: UIViewController {
     // MARK: Setup
     
     private func setup() {
-        setupTableView()
         setupBinding()
     }
-    private func setupTableView() {
-        tableView.register(StarwarsFilmCell.self, forCellReuseIdentifier: "StarwarsFilmCell")
-    }
     private func setupBinding() {
-        viewModel.films.bind() { [weak self] films in
+        viewModel.films.bind { [weak self] films in
             DispatchQueue.main.async {
-                self?.reload()
+                self?.tableView.reloadData()
             }
         }
-    }
-    
-    private func reload() {
-        tableView.reloadData()
     }
 }
 

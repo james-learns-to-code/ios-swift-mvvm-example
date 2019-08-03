@@ -11,7 +11,7 @@ import UIKit
 final class StarwarsViewControllerWithView: UIViewController {
     private let viewModel = StarwarsViewModel()
     
-    lazy private var tableView: UITableView = {
+    private lazy var tableView: UITableView = {
         let view = UITableView()
         view.delegate = self
         view.dataSource = self
@@ -35,22 +35,18 @@ final class StarwarsViewControllerWithView: UIViewController {
         view.addSubview(tableView)
         tableView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            tableView.heightAnchor.constraint(equalTo: view.heightAnchor),
-            tableView.widthAnchor.constraint(equalTo: view.widthAnchor),
-            tableView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            tableView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            tableView.topAnchor.constraint(equalTo: view.topAnchor),
+            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            tableView.leftAnchor.constraint(equalTo: view.leftAnchor),
+            tableView.rightAnchor.constraint(equalTo: view.rightAnchor)
             ])
     }
     private func setupBinding() {
-        viewModel.films.bind() { [weak self] films in
+        viewModel.films.bind { [weak self] films in
             DispatchQueue.main.async {
-                self?.reload()
+                self?.tableView.reloadData()
             }
         }
-    }
-    
-    private func reload() {
-        tableView.reloadData()
     }
 }
 
