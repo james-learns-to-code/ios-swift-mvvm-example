@@ -14,7 +14,7 @@ For demonstrate diverse use case of ViewController, i create diverse ViewControl
 I try to minimize use of Third-party library.
 
 ## View & ViewController
-I prefer separate view setup code from view-class side. It can archive by using view switching.
+I prefer separate view setup code from ViewController-class side. It can archive by using view switching.
 
     override func loadView() {
         super.loadView()
