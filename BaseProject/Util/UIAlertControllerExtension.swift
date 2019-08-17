@@ -13,7 +13,7 @@ extension UIAlertController {
         title: String,
         message: String?,
         doneButtonTitle: String,
-        completed: ((UIAlertAction)-> Void)?
+        completed: ((UIAlertAction)-> Void)? = nil
         ) {
         self.init(
             title: title,

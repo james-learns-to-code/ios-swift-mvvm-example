@@ -13,6 +13,17 @@ enum NetworkError: Error {
     case response(error: Error?)
     case data
     case jsonDecoding(error: Error?)
+    
+    var localizedDescription: String {
+        switch self {
+        case .response(let error):
+            return error?.localizedDescription ?? self.localizedDescription
+        case .jsonDecoding(let error):
+            return error?.localizedDescription ?? self.localizedDescription
+        default:
+            return self.localizedDescription
+        }
+    }
 }
 
 class NetworkManager {
