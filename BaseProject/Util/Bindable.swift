@@ -14,7 +14,7 @@ protocol Bindable {
     mutating func bind(closure: ((T?) -> Void)?)
 }
 
-struct PropertyBindable<Type>: Bindable {
+final class PropertyBindable<Type>: Bindable {
     private var closure: ((Type?) -> Void)?
 
     var value: Type? {
@@ -22,7 +22,7 @@ struct PropertyBindable<Type>: Bindable {
     }
     
     // DO NOT set 'value' in 'closure'. It will drag to recursive situtation.
-    mutating func bind(closure: ((Type?) -> Void)?) {
+    func bind(closure: ((Type?) -> Void)?) {
         self.closure = closure
     }
 }
