@@ -32,16 +32,17 @@ final class StarwarsView: UIView {
     // MARK: Setup
     
     private func setup() {
+        backgroundColor = .white
         addTableView()
     }
     private func addTableView() {
         addSubview(tableView)
         tableView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            tableView.heightAnchor.constraint(equalTo: heightAnchor),
-            tableView.widthAnchor.constraint(equalTo: widthAnchor),
-            tableView.centerXAnchor.constraint(equalTo: centerXAnchor),
-            tableView.centerYAnchor.constraint(equalTo: centerYAnchor),
+            tableView.safeAreaLayoutGuide.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
+            tableView.leftAnchor.constraint(equalTo: leftAnchor),
+            tableView.rightAnchor.constraint(equalTo: rightAnchor),
+            tableView.bottomAnchor.constraint(equalTo: bottomAnchor),
             ])
     }
 }

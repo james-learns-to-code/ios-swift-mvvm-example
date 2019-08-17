@@ -37,6 +37,19 @@ final class StarwarsViewController: UIViewController {
                 self?.customView.tableView.reloadData()
             }
         }
+        viewModel.error.bind { [weak self] error in
+            guard let self = self else { return }
+            DispatchQueue.main.async {
+                let alert = UIAlertController(
+                    title: "Error",
+                    message: error?.localizedDescription,
+                    doneButtonTitle: "OK"
+                ) { action in
+                    self.dismiss(animated: true)
+                }
+                self.present(alert, animated: true)
+            }
+        }
     }
 }
 
@@ -49,7 +62,8 @@ extension StarwarsViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "StarwarsFilmCell", for: indexPath) as! StarwarsFilmCell
+        let cell = tableView
+            .dequeueReusableCell(withIdentifier: "\(StarwarsFilmCell.self)", for: indexPath) as! StarwarsFilmCell
         let film = viewModel.film(at: indexPath)
         cell.configure(film: film)
         return cell

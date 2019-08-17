@@ -13,7 +13,7 @@ typealias API = StarwarsNetworkManager
 final class StarwarsNetworkManager: NetworkManager {
     static let shared = StarwarsNetworkManager()
     
-    struct URL {
+    private struct URL {
         static let base = "https://swapi.co/api/"
         static let filmPath = "films/"
         static let film = base + filmPath
@@ -22,15 +22,14 @@ final class StarwarsNetworkManager: NetworkManager {
 
 // MARK: Interface
 extension StarwarsNetworkManager {
-    typealias FilmListResultHandler = (Result<StarwarsFilmsModel, NetworkError>) -> Void
-
     func requestFilmList(
-        handler: @escaping FilmListResultHandler) {
+        handler: @escaping (Result<StarwarsFilmsModel, NetworkError>) -> Void) {
         request(
             with: StarwarsNetworkManager.URL.film,
-            type: .get) { result in
-                ResponseType<StarwarsFilmsModel>
-                    .decodeResult(result, handler: handler)
+            type: .get
+        ) { result in
+            Decoder<StarwarsFilmsModel>
+                .decodeResult(result, handler: handler)
         }
     }
 }

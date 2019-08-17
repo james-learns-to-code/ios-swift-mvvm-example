@@ -8,21 +8,14 @@
 
 import Foundation
 
-class NetworkManager {
-    typealias NetworkError = NetworkManager.CustomError
-    
-    enum CustomError: Error {
-        case url
-        case response(error: Error?)
-        case data
-        case jsonDecoding(error: Error?)
-        
-        static let domain = "app.network"
-    }
+enum NetworkError: Error {
+    case url
+    case response(error: Error?)
+    case data
+    case jsonDecoding(error: Error?)
+}
 
-    static let header: [String: String] = [
-        "Content-Type": "application/json"
-    ]
+class NetworkManager {
     
     // MARK: Request
     
@@ -34,6 +27,10 @@ class NetworkManager {
             return rawValue
         }
     }
+    
+    static let header: [String: String] = [
+        "Content-Type": "application/json"
+    ]
     
     typealias DataResult = Result<Data, NetworkError>
     typealias DataResultHandler = (DataResult) -> Void
@@ -54,7 +51,7 @@ class NetworkManager {
         return request(with: session, req, handler)
     }
     
-    func request(
+    private func request(
         with session: URLSession,
         _ request: URLRequest,
         _ handler: @escaping DataResultHandler) -> URLSessionDataTask {
@@ -77,7 +74,7 @@ class NetworkManager {
     }
     
     // MARK: Decoder
-    struct ResponseType<Type: Decodable> {
+    struct Decoder<Type: Decodable> {
         static func decodeResult(
             _ result: DataResult,
             handler: @escaping (Result<Type, NetworkError>) -> Void) {
