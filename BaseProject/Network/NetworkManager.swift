@@ -15,37 +15,22 @@ enum NetworkError: Error {
     case jsonDecoding(error: Error?)
     
     var localizedDescription: String {
+        let customDescription: String?
         switch self {
         case .response(let error):
-            return error?.localizedDescription ?? self.localizedDescription
+            customDescription = error?.localizedDescription
         case .jsonDecoding(let error):
-            return error?.localizedDescription ?? self.localizedDescription
+            customDescription = error?.localizedDescription
         default:
-            return self.localizedDescription
+            customDescription = nil
         }
+        return customDescription ?? self.localizedDescription
     }
 }
 
 class NetworkManager {
     
-    // MARK: Request
-    
-    enum RequestType: String {
-        case post = "POST"
-        case get = "GET"
-        
-        var httpMethod: String {
-            return rawValue
-        }
-    }
-    
-    static let header: [String: String] = [
-        "Content-Type": "application/json"
-    ]
-    
-    typealias DataResult = Result<Data, NetworkError>
-    typealias DataResultHandler = (DataResult) -> Void
-    
+    // MARK: Interface
     @discardableResult
     func request(
         with url: URL,
@@ -58,9 +43,27 @@ class NetworkManager {
         
         let config = URLSessionConfiguration.default
         let session = URLSession(configuration: config)
-
+        
         return request(with: session, req, handler)
     }
+    
+    // MARK: Request
+    
+    enum RequestType: String {
+        case post = "POST"
+        case get = "GET"
+        
+        var httpMethod: String {
+            return rawValue
+        }
+    }
+    
+    private static let header: [String: String] = [
+        "Content-Type": "application/json"
+    ]
+    
+    typealias DataResult = Result<Data, NetworkError>
+    typealias DataResultHandler = (DataResult) -> Void
     
     private func request(
         with session: URLSession,
@@ -106,7 +109,7 @@ class NetworkManager {
     }
 }
 
-// MARK: Interface
+// MARK: Convenience
 extension NetworkManager {
     func request(
         with urlString: String,

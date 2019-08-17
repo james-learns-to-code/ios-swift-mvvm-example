@@ -13,10 +13,7 @@ final class StarwarsViewController: UIViewController {
     
     // MARK: View switching
     
-    private lazy var customView: StarwarsView = {
-        let view = StarwarsView(delegate: self, dataSource: self)
-        return view
-    }()
+    private lazy var customView = StarwarsView(delegate: self, dataSource: self)
     
     override func loadView() {
         super.loadView()
@@ -28,26 +25,22 @@ final class StarwarsViewController: UIViewController {
     // MARK: Setup
     
     private func setup() {
-        setupBinding()
+        setupBind()
     }
     
-    private func setupBinding() {
-        viewModel.films.bind { [weak self] films in
-            DispatchQueue.main.async {
-                self?.customView.tableView.reloadData()
-            }
+    private func setupBind() {
+        
+        viewModel.films.bind = { [weak self] films in
+            self?.customView.tableView.reloadData()
         }
-        viewModel.error.bind { [weak self] error in
+        
+        viewModel.error.bind = { [weak self] error in
             guard let self = self else { return }
-            DispatchQueue.main.async {
-                let alert = UIAlertController(
-                    title: "Error",
-                    message: error?.localizedDescription,
-                    doneButtonTitle: "OK"
-                ) { action in
-                    self.dismiss(animated: true)
-                }
-                self.present(alert, animated: true)
+            UIAlertController.presentError(
+                in: self,
+                message: error?.localizedDescription
+            ) { action in
+                self.dismiss(animated: true)
             }
         }
     }
@@ -57,6 +50,7 @@ extension StarwarsViewController: UITableViewDelegate {
 }
 
 extension StarwarsViewController: UITableViewDataSource {
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModel.numberOfRowsInSection(section)
     }

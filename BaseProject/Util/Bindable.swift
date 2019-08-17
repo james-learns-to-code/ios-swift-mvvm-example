@@ -8,21 +8,38 @@
 
 import Foundation
 
+/**
+
+ Simple reactive binding wrapper protocol.
+ 
+ - value: Reactive state. Using didSet for listening event is the easiest way.
+ - bind: Closure for executing when value changed.
+
+ DO NOT set 'value' in 'closure'. It will drag to recursive situtation.
+ Only one listner can binded with Bindable
+*/
 protocol Bindable {
     associatedtype T
     var value: T? { get set }
-    mutating func bind(closure: ((T?) -> Void)?)
+    var bind: ((T?) -> Void)? { get set }
 }
 
 final class PropertyBindable<Type>: Bindable {
-    private var closure: ((Type?) -> Void)?
+    var bind: ((Type?) -> Void)?
 
     var value: Type? {
-        didSet { closure?(value) }
+        didSet { bind?(value) }
     }
+}
+
+final class UIBindable<Type>: Bindable {
+    var bind: ((Type?) -> Void)?
     
-    // DO NOT set 'value' in 'closure'. It will drag to recursive situtation.
-    func bind(closure: ((Type?) -> Void)?) {
-        self.closure = closure
+    var value: Type? {
+        didSet {
+            DispatchQueue.main.async {
+                self.bind?(self.value)
+            }
+        }
     }
 }

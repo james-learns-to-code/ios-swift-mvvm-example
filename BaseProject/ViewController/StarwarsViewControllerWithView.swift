@@ -31,6 +31,7 @@ final class StarwarsViewControllerWithView: UIViewController {
         addTableView()
         setupBinding()
     }
+    
     private func addTableView() {
         view.addSubview(tableView)
         tableView.translatesAutoresizingMaskIntoConstraints = false
@@ -41,11 +42,10 @@ final class StarwarsViewControllerWithView: UIViewController {
             tableView.rightAnchor.constraint(equalTo: view.rightAnchor)
             ])
     }
+    
     private func setupBinding() {
-        viewModel.films.bind { [weak self] films in
-            DispatchQueue.main.async {
-                self?.tableView.reloadData()
-            }
+        viewModel.films.bind = { [weak self] films in
+            self?.tableView.reloadData()
         }
     }
 }

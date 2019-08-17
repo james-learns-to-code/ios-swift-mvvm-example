@@ -10,8 +10,8 @@ import Foundation
 
 final class StarwarsViewModel {
     
-    let films = PropertyBindable<StarwarsFilmsModel>()
-    let error = PropertyBindable<NetworkError>()
+    let films = UIBindable<StarwarsFilmsModel>()
+    let error = UIBindable<NetworkError>()
     
     func film(at indexPath: IndexPath) -> StarwarsFilmModel? {
         return films.value?.results?[indexPath.row]
