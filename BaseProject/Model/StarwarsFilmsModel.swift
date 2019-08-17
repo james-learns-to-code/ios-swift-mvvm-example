@@ -9,11 +9,11 @@
 import Foundation
 
 struct StarwarsFilmsModel: Codable {
-    var results: [StarwarsFilmModel]?
+    let results: [StarwarsFilmModel]?
 }
 
 struct StarwarsFilmModel: Codable {
-    var title: String?
-    var episode_id: Int?
-    var director: String?
+    let title: String?
+    let episode_id: Int?
+    let director: String?
 }

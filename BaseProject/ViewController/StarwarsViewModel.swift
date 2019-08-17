@@ -10,7 +10,8 @@ import Foundation
 
 final class StarwarsViewModel {
     
-    var films = Binding<StarwarsFilmsModel>()
+    var films = PropertyBindable<StarwarsFilmsModel>()
+    var error = PropertyBindable<NetworkError>()
     
     func film(at indexPath: IndexPath) -> StarwarsFilmModel? {
         return films.value?.results?[indexPath.row]
@@ -28,7 +29,7 @@ final class StarwarsViewModel {
             case .success(let value):
                 self.films.value = value
             case .failure(let error):
-                print(error)
+                self.error.value = error
             }
         }
     }

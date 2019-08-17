@@ -16,16 +16,16 @@ class NetworkResponseTests: QuickSpec {
  
     override func spec() {
         
-        // MARK: prepare
+        // Setup
         let timeout = TimeInterval(5)
 
-        // Network response have to be callback properly
+        // Network response have to be called-back in time
         describe("Network request") {
             context("Starwars api list") {
-                it("Have to be callback properly") {
+                it("Have to be called-back in time") {
                     waitUntil(timeout: timeout) { done in
                         StarwarsNetworkManager.shared.requestFilmList { result in
-                            if case .success = result {} else { fail() }
+                            guard case .success = result else { fail(); return }
                             done()
                         }
                     }
