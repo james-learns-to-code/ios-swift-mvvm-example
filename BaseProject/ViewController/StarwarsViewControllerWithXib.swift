@@ -30,10 +30,8 @@ final class StarwarsViewControllerWithXib: UIViewController {
         setupBinding()
     }
     private func setupBinding() {
-        viewModel.films.bind { [weak self] films in
-            DispatchQueue.main.async {
-                self?.tableView.reloadData()
-            }
+        viewModel.films.bind = { [weak self] films in
+            self?.tableView.reloadData()
         }
     }
 }
