@@ -17,7 +17,6 @@ I try to minimize use of Third-party library.
 I prefer separate view setup code from ViewController-class side. It can archive by using view switching.
 
     override func loadView() {
-        super.loadView()
         view = customView
     }
 
