@@ -16,7 +16,6 @@ final class StarwarsViewController: UIViewController {
     private lazy var customView = StarwarsView(delegate: self, dataSource: self)
     
     override func loadView() {
-        super.loadView()
         view = customView
         setup()
         viewModel.fetchApiList()
