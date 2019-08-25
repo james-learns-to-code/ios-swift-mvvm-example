@@ -20,7 +20,7 @@ final class StarwarsNetworkManager: NetworkManager {
     }
 }
 
-// MARK: Interface
+// MARK: API
 extension StarwarsNetworkManager {
     func requestFilmList(
         handler: @escaping (Result<StarwarsFilmsModel, NetworkError>) -> Void) {

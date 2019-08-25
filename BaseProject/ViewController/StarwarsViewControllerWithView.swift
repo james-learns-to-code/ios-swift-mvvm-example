@@ -28,8 +28,9 @@ final class StarwarsViewControllerWithView: UIViewController {
     // MARK: Setup
     
     private func setup() {
+        view.backgroundColor = .white
         addTableView()
-        setupBinding()
+        setupBind()
     }
     
     private func addTableView() {
@@ -43,9 +44,20 @@ final class StarwarsViewControllerWithView: UIViewController {
             ])
     }
     
-    private func setupBinding() {
+    private func setupBind() {
+        
         viewModel.films.bind = { [weak self] films in
             self?.tableView.reloadData()
+        }
+        
+        viewModel.error.bind = { [weak self] error in
+            guard let self = self else { return }
+            UIAlertController.presentError(
+                in: self,
+                message: error?.localizedDescription
+            ) { action in
+                self.dismiss(animated: true)
+            }
         }
     }
 }

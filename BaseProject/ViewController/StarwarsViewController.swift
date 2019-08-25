@@ -12,21 +12,22 @@ final class StarwarsViewController: UIViewController {
     private let viewModel = StarwarsViewModel()
     
     // MARK: View switching
-    
     private lazy var customView = StarwarsView(delegate: self, dataSource: self)
-    
     override func loadView() {
         view = customView
+    }
+    
+    // MARK: Lifecycle
+    override func viewDidLoad() {
+        super.viewDidLoad()
         setup()
         viewModel.fetchApiList()
     }
     
     // MARK: Setup
-    
     private func setup() {
         setupBind()
     }
-    
     private func setupBind() {
         
         viewModel.films.bind = { [weak self] films in

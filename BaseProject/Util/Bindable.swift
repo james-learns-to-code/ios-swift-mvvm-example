@@ -15,8 +15,7 @@ import Foundation
  - value: Reactive state. Using didSet for listening event is the easiest way.
  - bind: Closure for executing when value changed.
 
- DO NOT set 'value' in 'closure'. It will drag to recursive situtation.
- Only one listner can binded with Bindable
+ DO NOT set 'value' in 'bind' closure. It will drag to recursive situtation.
 */
 protocol Bindable {
     associatedtype T
