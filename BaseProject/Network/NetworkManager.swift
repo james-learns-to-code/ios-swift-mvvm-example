@@ -35,7 +35,7 @@ class NetworkManager {
     func request(
         with url: URL,
         type: RequestType,
-        handler: @escaping DataResultHandler) -> URLSessionDataTask {
+        handler: @escaping DataResultHandler) -> URLSessionDataTask? {
         
         var req = URLRequest(url: url)
         req.httpMethod = type.httpMethod
@@ -86,8 +86,10 @@ class NetworkManager {
         task.resume()
         return task
     }
-    
-    // MARK: Decoder
+}
+
+// MARK: Decoder
+extension NetworkManager {
     struct Decoder<Type: Decodable> {
         static func decodeResult(
             _ result: DataResult,
@@ -111,14 +113,15 @@ class NetworkManager {
 
 // MARK: Convenience
 extension NetworkManager {
+    @discardableResult
     func request(
         with urlString: String,
         type: RequestType,
-        handler: @escaping DataResultHandler) {
+        handler: @escaping DataResultHandler) -> URLSessionDataTask? {
         guard let url = URL(string: urlString) else {
             handler(.failure(.url))
-            return
+            return nil
         }
-        request(with: url, type: type, handler: handler)
+        return request(with: url, type: type, handler: handler)
     }
 }
