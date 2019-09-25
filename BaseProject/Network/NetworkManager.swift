@@ -24,7 +24,7 @@ enum NetworkError: Error {
         default:
             customDescription = nil
         }
-        return customDescription ?? self.localizedDescription
+        return customDescription ?? ""
     }
 }
 
