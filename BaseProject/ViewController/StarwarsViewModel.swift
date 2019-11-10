@@ -14,11 +14,11 @@ final class StarwarsViewModel {
     let error = UIBindable<NetworkError>()
     
     func film(at indexPath: IndexPath) -> StarwarsFilmModel? {
-        return films.value?.results?[indexPath.row]
+        films.value?.results?[indexPath.row]
     }
     
     func numberOfRowsInSection(_ section: Int) -> Int {
-        return films.value?.results?.count ?? 0
+        films.value?.results?.count ?? 0
     }
     
     // MARK: API

@@ -53,9 +53,7 @@ class NetworkManager {
         case post = "POST"
         case get = "GET"
         
-        var httpMethod: String {
-            return rawValue
-        }
+        var httpMethod: String { rawValue }
     }
     
     private static let header: [String: String] = [

@@ -10,7 +10,7 @@ import UIKit
 
 struct StarwarsFilmCellViewModel {
     static func getTitle(from film: StarwarsFilmModel?) -> String {
-        return "\(film?.episode_id ?? 0) \(film?.title ?? "") - \(film?.director ?? "")"
+        "\(film?.episode_id ?? 0) \(film?.title ?? "") - \(film?.director ?? "")"
     }
 }
 
