@@ -15,6 +15,7 @@ final class StarwarsViewControllerWithXib: UIViewController {
     private weak var tableView: UITableView! {
         didSet {
             tableView.register(StarwarsFilmCell.self, forCellReuseIdentifier: "StarwarsFilmCell")
+            tableView.register(UINib(nibName: "StartwarsHeaderView", bundle: nil), forHeaderFooterViewReuseIdentifier: "StartwarsHeaderView")
         }
     }
     
@@ -30,6 +31,7 @@ final class StarwarsViewControllerWithXib: UIViewController {
         setupBind()
     }
     private func setupBind() {
+        tableView.allowsMultipleSelection = false
         
         viewModel.films.bind = { [weak self] films in
             self?.tableView.reloadData()
@@ -60,5 +62,19 @@ extension StarwarsViewControllerWithXib: UITableViewDataSource {
         let film = viewModel.film(at: indexPath)
         cell.configure(film: film)
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        // For using custom view
+//        guard let xibName = String(describing: StartwarsHeaderView.self).components(separatedBy: ".").last else { return nil }
+//        guard let _ = Bundle.main.path(forResource: xibName, ofType: "nib") else { return nil } // check xib exists.
+//        return Bundle.main.loadNibNamed(xibName, owner: nil, options: nil)?.first as? StartwarsHeaderView
+
+        // For using registed header view
+        return tableView.dequeueReusableHeaderFooterView(withIdentifier: "StartwarsHeaderView")
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 50
     }
 }

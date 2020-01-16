@@ -15,6 +15,8 @@
 		1C1209D022B0DE9A005D0972 /* BaseProjectUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C1209CF22B0DE9A005D0972 /* BaseProjectUITests.swift */; };
 		1C18E7D82307F5EC00485521 /* StartwarsViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C18E7D72307F5EC00485521 /* StartwarsViewTests.swift */; };
 		1C18E7DA2308423500485521 /* UIAlertControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C18E7D92308423500485521 /* UIAlertControllerExtension.swift */; };
+		1C22898123D040A2001E91F7 /* StartwarsHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C22898023D040A2001E91F7 /* StartwarsHeaderView.swift */; };
+		1C22898323D040AF001E91F7 /* StartwarsHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1C22898223D040AF001E91F7 /* StartwarsHeaderView.xib */; };
 		1CC76F2722B3D3AF00D39971 /* StarwarsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CC76F2622B3D3AF00D39971 /* StarwarsViewController.swift */; };
 		1CC76F2922B3D3E600D39971 /* StarwarsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CC76F2822B3D3E600D39971 /* StarwarsView.swift */; };
 		1CC76F2C22B3D43D00D39971 /* StarwarsNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CC76F2B22B3D43D00D39971 /* StarwarsNetworkManager.swift */; };
@@ -66,6 +68,8 @@
 		1C1209DE22B0E119005D0972 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = SOURCE_ROOT; };
 		1C18E7D72307F5EC00485521 /* StartwarsViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartwarsViewTests.swift; sourceTree = "<group>"; };
 		1C18E7D92308423500485521 /* UIAlertControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIAlertControllerExtension.swift; sourceTree = "<group>"; };
+		1C22898023D040A2001E91F7 /* StartwarsHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartwarsHeaderView.swift; sourceTree = "<group>"; };
+		1C22898223D040AF001E91F7 /* StartwarsHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StartwarsHeaderView.xib; sourceTree = "<group>"; };
 		1C93AFA922B1130700C6105B /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text; path = .swiftlint.yml; sourceTree = SOURCE_ROOT; };
 		1CC76F2622B3D3AF00D39971 /* StarwarsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarwarsViewController.swift; sourceTree = "<group>"; };
 		1CC76F2822B3D3E600D39971 /* StarwarsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarwarsView.swift; sourceTree = "<group>"; };
@@ -277,6 +281,8 @@
 			isa = PBXGroup;
 			children = (
 				9437FB4122B4191200CE74C5 /* StarwarsFilmCell.swift */,
+				1C22898023D040A2001E91F7 /* StartwarsHeaderView.swift */,
+				1C22898223D040AF001E91F7 /* StartwarsHeaderView.xib */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -418,6 +424,7 @@
 				1C1209BA22B0DE99005D0972 /* LaunchScreen.storyboard in Resources */,
 				94195F2F22B4AD74001B788B /* StarwarsViewControllerWithXib.xib in Resources */,
 				1C1209B722B0DE99005D0972 /* Assets.xcassets in Resources */,
+				1C22898323D040AF001E91F7 /* StartwarsHeaderView.xib in Resources */,
 				1C1209B522B0DE99005D0972 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -529,6 +536,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9437FB4422B422AF00CE74C5 /* NetworkManager.swift in Sources */,
+				1C22898123D040A2001E91F7 /* StartwarsHeaderView.swift in Sources */,
 				1CC76F2722B3D3AF00D39971 /* StarwarsViewController.swift in Sources */,
 				1C18E7DA2308423500485521 /* UIAlertControllerExtension.swift in Sources */,
 				9437FB4222B4191200CE74C5 /* StarwarsFilmCell.swift in Sources */,
